@@ -24,9 +24,9 @@ t = tcpclient('192.168.1.10', 7);
 while(1)
     %ask the server for sensor data
     write(t,1);
-    IRSensor = native2unicode(read(t,8))
-    USSensor = native2unicode(read(t,8))
-    fusionData = native2unicode(read(t,8))
+    IRSensor = str2double(native2unicode(read(t,8)))
+    USSensor = str2double(native2unicode(read(t,8)))
+    fusionData = str2double(native2unicode(read(t,8)))
     
     %plot realtime data
     IRDistBuff = [IRDistBuff(2:end) IRSensor];

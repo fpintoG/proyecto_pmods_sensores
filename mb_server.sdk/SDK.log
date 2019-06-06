@@ -7836,3 +7836,38 @@ con
 
 01:44:32 INFO  : Launch script is exported to file 'C:\Users\felip\mb_server\mb_server.sdk\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_using_debug_test_echo.elf_on_local.tcl'
 01:44:34 WARN  : Processor 'microblaze_0' is not supported for performance analysis as extended debug is not enabled.
+02:16:10 INFO  : Disconnected from the channel tcfchan#13.
+02:17:05 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+02:17:05 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Nexys4DDR 210292744079A" && level==0} -index 0' command is executed.
+02:17:07 INFO  : FPGA configured successfully with bitstream "C:/Users/felip/mb_server/mb_server.sdk/design_1_wrapper_hw_platform_0/download.bit"
+02:17:32 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Nexys4DDR 210292744079A" && level==0} -index 0' command is executed.
+02:17:32 INFO  : 'fpga -state' command is executed.
+02:17:32 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+02:17:32 INFO  : Jtag cable 'Digilent Nexys4DDR 210292744079A' is selected.
+02:17:32 INFO  : 'jtag frequency' command is executed.
+02:17:32 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+02:17:32 INFO  : Context for processor 'microblaze_0' is selected.
+02:17:32 INFO  : Processor reset is completed for 'microblaze_0'.
+02:17:32 INFO  : Context for processor 'microblaze_0' is selected.
+02:17:33 INFO  : The application 'C:/Users/felip/mb_server/mb_server.sdk/test_echo/Debug/test_echo.elf' is downloaded to processor 'microblaze_0'.
+02:17:33 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent Nexys4DDR 210292744079A"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent Nexys4DDR 210292744079A"} -index 0
+dow C:/Users/felip/mb_server/mb_server.sdk/test_echo/Debug/test_echo.elf
+----------------End of Script----------------
+
+02:17:33 INFO  : Memory regions updated for context PA
+02:17:33 INFO  : Memory regions updated for context MicroBlaze Debug Module at USER2
+02:17:33 INFO  : Context for processor 'microblaze_0' is selected.
+02:17:33 INFO  : 'con' command is executed.
+02:17:33 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent Nexys4DDR 210292744079A"} -index 0
+con
+----------------End of Script----------------
+
+02:17:33 INFO  : Launch script is exported to file 'C:\Users\felip\mb_server\mb_server.sdk\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_using_debug_test_echo.elf_on_local.tcl'
+02:17:35 WARN  : Processor 'microblaze_0' is not supported for performance analysis as extended debug is not enabled.
+02:25:56 INFO  : Disconnected from the channel tcfchan#14.
