@@ -1,0 +1,13 @@
+09:23:12 **** Auto Build of configuration Debug for project test ****
+make all 
+Building file: ../src/main.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../test_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:68:10: fatal error: dataProc/circular_buffer.h: No such file or directory
+ #include "dataProc/circular_buffer.h"
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [src/subdir.mk:29: src/main.o] Error 1
+
+09:23:13 Build Finished (took 590ms)
+

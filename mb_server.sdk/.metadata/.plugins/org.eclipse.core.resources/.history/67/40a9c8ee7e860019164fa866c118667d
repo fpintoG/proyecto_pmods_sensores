@@ -1,0 +1,693 @@
+
+
+/***************************** Include Files *********************************/
+#include <stdio.h>
+#include <math.h>
+#include "xparameters.h"
+#include "xtmrctr.h"
+#include "xintc.h"
+#include "xil_exception.h"
+#include "xil_printf.h"
+#include "PmodAD2.h"
+#include "sleep.h"
+#include "xil_cache.h"
+#include "PmodGPIO.h"
+#include "circular_buffer.h"
+#include "sensor_fusion.h"
+#include "netif/xadapter.h"
+
+#include "netif/xadapter.h"
+#include "platform.h"
+#include "platform_config.h"
+#if defined (__arm__) || defined(__aarch64__)
+#include "xil_printf.h"
+#endif
+
+#include "lwip/tcp.h"
+#include "xil_cache.h"
+
+#if LWIP_IPV6==1
+#include "lwip/ip.h"
+#else
+#if LWIP_DHCP==1
+#include "lwip/dhcp.h"
+#endif
+#endif
+
+/************************** Constant Definitions *****************************/
+
+#define TMRCTR_DEVICE_ID	XPAR_TMRCTR_0_DEVICE_ID
+#define INTC_DEVICE_ID		XPAR_INTC_0_DEVICE_ID
+#define TMRCTR_INTERRUPT_ID	 XPAR_INTC_0_TMRCTR_0_VEC_ID
+
+#define TIMER_CNTR_0	 1
+
+
+#define RESET_VALUE	 0xFFFFD8EF //10000 hz
+
+/**************************** Type Definitions *******************************/
+
+
+/***************** Macros (Inline Functions) Definitions *********************/
+
+
+/************************** Function Prototypes ******************************/
+
+int Run(XIntc *IntcInstancePtr,
+			XTmrCtr *InstancePtr,
+			u16 DeviceId,
+			u16 IntrId,
+			u8 TmrCtrNumber);
+
+static int TmrCtrSetupIntrSystem(XIntc *IntcInstancePtr,
+				XTmrCtr *InstancePtr,
+				u16 DeviceId,
+				u16 IntrId,
+				u8 TmrCtrNumber);
+
+static void TimerCounterHandler(void *CallBackRef, u8 TmrCtrNumber);
+
+static void TmrCtrDisableIntr(XIntc *IntcInstancePtr, u16 IntrId);
+
+static void TmrCtr_FastHandler(void) __attribute__ ((fast_interrupt));
+
+void Initialize_sensors();
+
+void Cleanup();
+
+void EnableCaches();
+
+void DisableCaches();
+
+void USsensorSetup();
+
+/* defined by each RAW mode application */
+void print_app_header();
+int start_application();
+int transfer_data();
+void tcp_fasttmr(void);
+void tcp_slowtmr(void);
+int Server_initialize();
+
+/* missing declaration in lwIP */
+void lwip_init();
+
+#if LWIP_IPV6==0
+#if LWIP_DHCP==1
+extern volatile int dhcp_timoutcntr;
+err_t dhcp_start(struct netif *netif);
+#endif
+#endif
+
+/************************** Variable Definitions *****************************/
+
+XIntc InterruptController;  /* The instance of the Interrupt Controller */
+XTmrCtr TimerCounterInst;   /* The instance of the Timer Counter */
+PmodAD2 IRsensor; /*IR sensor instance*/
+PmodGPIO USsensor; /*Ultrasonic sensor instance*/
+
+/*
+ * The following variables are shared between non-interrupt processing and
+ * interrupt processing such that they must be global.
+ */
+volatile int TimerExpired;
+volatile int getIRDistance;
+volatile int timerIRCounter;
+volatile int getUSDistance;
+volatile int USpin;
+volatile int timerUSCounter;
+//volatile int lastUSTime;
+
+//////////////////////////////////////server////////////////////////////////////////////////////////
+extern volatile int TcpFastTmrFlag;
+extern volatile int TcpSlowTmrFlag;
+
+static struct netif server_netif;
+struct netif *echo_netif;
+
+#if LWIP_IPV6==1
+void print_ip6(char *msg, ip_addr_t *ip)
+{
+	print(msg);
+	xil_printf(" %x:%x:%x:%x:%x:%x:%x:%x\n\r",
+			IP6_ADDR_BLOCK1(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK2(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK3(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK4(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK5(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK6(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK7(&ip->u_addr.ip6),
+			IP6_ADDR_BLOCK8(&ip->u_addr.ip6));
+
+}
+#else
+void
+print_ip(char *msg, ip_addr_t *ip)
+{
+	print(msg);
+	xil_printf("%d.%d.%d.%d\n\r", ip4_addr1(ip), ip4_addr2(ip),
+			ip4_addr3(ip), ip4_addr4(ip));
+}
+
+void
+print_ip_settings(ip_addr_t *ip, ip_addr_t *mask, ip_addr_t *gw)
+{
+
+	print_ip("Board IP: ", ip);
+	print_ip("Netmask : ", mask);
+	print_ip("Gateway : ", gw);
+}
+#endif
+
+#if defined (__arm__) && !defined (ARMR5)
+#if XPAR_GIGE_PCS_PMA_SGMII_CORE_PRESENT == 1 || XPAR_GIGE_PCS_PMA_1000BASEX_CORE_PRESENT == 1
+int ProgramSi5324(void);
+int ProgramSfpPhy(void);
+#endif
+#endif
+
+#ifdef XPS_BOARD_ZCU102
+#ifdef XPAR_XIICPS_0_DEVICE_ID
+int IicPhyReset(void);
+#endif
+#endif
+//////////////////////////////////////server////////////////////////////////////////////////////////
+
+double fusionDist = 10;
+
+
+int main(void)
+{
+
+	int Status;
+	//Server_initialize();
+
+	Status = Run(&InterruptController,
+				  &TimerCounterInst,
+				  TMRCTR_DEVICE_ID,
+				  TMRCTR_INTERRUPT_ID,
+				  TIMER_CNTR_0);
+
+	if (Status != XST_SUCCESS) {
+		xil_printf("Tmrctr fast interrupt program Failed\r\n");
+		return XST_FAILURE;
+	}
+
+	Cleanup();
+
+
+}
+
+
+/*****************************************************************************/
+/**
+*
+*****************************************************************************/
+int Run(XIntc *IntcInstancePtr,
+			XTmrCtr *TmrCtrInstancePtr,
+			u16 DeviceId,
+			u16 IntrId,
+			u8 TmrCtrNumber)
+{
+	int Status;
+
+	/*
+	 * Initialize the timer counter so that it's ready to use,
+	 * specify the device ID that is generated in xparameters.h
+	 */
+	Status = XTmrCtr_Initialize(TmrCtrInstancePtr, DeviceId);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Perform a self-test to ensure that the hardware was built
+	 * correctly, use the 1st timer in the device (0)
+	 */
+	Status = XTmrCtr_SelfTest(TmrCtrInstancePtr, TmrCtrNumber);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Connect the timer counter to the interrupt subsystem such that
+	 * interrupts can occur.  This function is application specific.
+	 */
+/*	Status = TmrCtrSetupIntrSystem(IntcInstancePtr,
+					TmrCtrInstancePtr,
+					DeviceId,
+					IntrId,
+					TmrCtrNumber);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+*/
+	/*
+	 * Setup the handler for the timer counter that will be called from the
+	 * interrupt context when the timer expires, specify a pointer to the
+	 * timer counter driver instance as the callback reference so the
+	 * handler is able to access the instance data
+	 */
+//	XTmrCtr_SetHandler(TmrCtrInstancePtr, TimerCounterHandler,
+//					   TmrCtrInstancePtr);
+
+	/*
+	 * Enable the interrupt of the timer counter so interrupts will occur
+	 * and use auto reload mode such that the timer counter will reload
+	 * itself automatically and continue repeatedly, without this option
+	 * it would expire once only
+	 */
+	XTmrCtr_SetOptions(TmrCtrInstancePtr, TmrCtrNumber, XTC_AUTO_RELOAD_OPTION);
+	/*
+	 * Set a reset value for the timer counter such that it will expire
+	 * eariler than letting it roll over from 0, the reset value is loaded
+	 * into the timer counter when it is started
+	 */
+//	XTmrCtr_SetResetValue(TmrCtrInstancePtr, TmrCtrNumber, RESET_VALUE); //0xFFF0BDBF
+
+	/*
+	 * Start the timer counter such that it's incrementing by default,
+	 * then wait for it to timeout a number of times
+	 */
+	XTmrCtr_Start(TmrCtrInstancePtr, TmrCtrNumber);
+
+	Initialize_sensors();
+
+    //Server_initialize();
+
+	uint BeginTime;
+	uint EndTime;
+	uint calibration;
+
+	int bufferLen  = 20;
+	// ADC variables
+	u16 conv;
+	double voltage;
+	double IRDist = 0;
+	double IRsensorData[bufferLen];
+	circ_bbuf_t IRsensorBuffer = {
+	   .buffer = IRsensorData,
+	   .head = 0,
+	   .tail = 0,
+	   .maxlen = bufferLen
+	};
+	getIRDistance = 0;
+
+
+	 //gpio sensor variables
+	double USDist = 0;
+	double lastUSTime = 0;
+	double USsensorData[bufferLen];
+	circ_bbuf_t USsensorBuffer = {
+	   .buffer = USsensorData,
+	   .head = 0,
+	   .tail = 0,
+	   .maxlen = bufferLen
+	};
+	USpin = 0;
+	getUSDistance = 0;
+
+
+	//just a variable to pop data from the buffer
+	double popData;
+
+	BeginTime = XTmrCtr_GetValue(TmrCtrInstancePtr, TmrCtrNumber);
+	EndTime = XTmrCtr_GetValue(TmrCtrInstancePtr, TmrCtrNumber);
+	calibration = EndTime - BeginTime;
+
+	//first setup to trigger us sensor
+	USsensorSetup();
+
+	while (1) {
+/*
+		//send data to server
+		 if (TcpFastTmrFlag) {
+		 	 tcp_fasttmr();
+			 TcpFastTmrFlag = 0;
+		 }
+		 if (TcpSlowTmrFlag) {
+			 tcp_slowtmr();
+			 TcpSlowTmrFlag = 0;
+		 }
+		 xemacif_input(echo_netif);
+		 transfer_data();
+*/
+		if (getIRDistance) {
+			 AD2_ReadConv(&IRsensor, &conv);
+			 // Scale captured data such that 0x000:0xFFF => 0.0:3.3
+			 voltage = (double) (conv & AD2_DATA_MASK) * 3.3 / (AD2_DATA_MASK + 1);
+			 IRDist = 38.128 / pow(voltage, 0.909); //IR sensor distance in cm
+			 //printf("Pin V1 = %.02f cm \n", IRDist);
+			 circ_bbuf_push(&IRsensorBuffer, IRDist);
+			 getIRDistance = 0;
+		 }
+
+		 if (getUSDistance) {
+			 USDist = 17000 * lastUSTime / 100000000; //get ultrasonic distance in cm
+			 printf("ultasonic sensor dist: %f \r\n", USDist);
+			 circ_bbuf_push(&USsensorBuffer, USDist); //push data into the buffer
+			 getUSDistance = 0;
+			 timerUSCounter = 0; // reset timer for next count
+		 }
+
+		 USsensorSetup();
+		 while (!GPIO_getPin(&USsensor, 2)) {
+
+		 }
+
+		 BeginTime = XTmrCtr_GetValue(TmrCtrInstancePtr, TmrCtrNumber);
+		 while (GPIO_getPin(&USsensor, 2)) {
+
+		 }
+
+		 EndTime = XTmrCtr_GetValue(TmrCtrInstancePtr, TmrCtrNumber);
+		 lastUSTime = EndTime - BeginTime - calibration;
+		 getUSDistance = 1;
+		 usleep(2000);
+
+		  //do sensor fusion here
+		 if (isBufferFull(IRsensorBuffer) && isBufferFull(USsensorBuffer)) {
+			 fusionDist = getFusionData(IRsensorData, bufferLen, USsensorData, bufferLen);
+			 printf("fusion sensor distance: %f \r\n", fusionDist);
+			 circ_bbuf_pop(&IRsensorBuffer, &popData); //pop data from buffer
+			 circ_bbuf_pop(&USsensorBuffer, &popData); //pop data from buffer
+		 } else if (isBufferFull(IRsensorBuffer)) {
+			 circ_bbuf_pop(&IRsensorBuffer, &popData); //pop data from buffer
+		 } else if (isBufferFull(USsensorBuffer)) {
+			 circ_bbuf_pop(&USsensorBuffer, &popData); //pop data from buffer
+		 } else {
+			 //wait for more data
+		 }
+
+  }
+
+   TmrCtrDisableIntr(IntcInstancePtr, IntrId);
+   return XST_SUCCESS;
+}
+
+/*****************************************************************************/
+/**
+*
+******************************************************************************/
+/*
+void TimerCounterHandler(void *CallBackRef, u8 TmrCtrNumber)
+{
+	//handle sensor interruption
+	//xil_printf("TimerCounterHandler called\n\r");
+	XTmrCtr* InstancePtr = (XTmrCtr*)CallBackRef;
+
+
+
+	//if (XTmrCtr_IsExpired(InstancePtr, TmrCtrNumber)) {
+	timerIRCounter++;
+	if (timerIRCounter == 400) {
+		getIRDistance = 1;
+		timerIRCounter = 0;
+	}
+
+	//see if ulstrasonic sensor count it is initialized
+	timerUSCounter++;
+
+
+	if (USpin) {
+		getUSDistance = 1;
+		lastUSTime = timerUSCounter;
+		USpin = 0;
+
+	}
+
+	//}
+
+}
+
+*/
+/*****************************************************************************/
+/**
+******************************************************************************/
+/*
+static int TmrCtrSetupIntrSystem(XIntc *IntcInstancePtr,
+				 XTmrCtr *TmrCtrInstancePtr,
+				 u16 DeviceId,
+				 u16 IntrId,
+				 u8 TmrCtrNumber)
+{*/
+//	 int Status;
+
+	/*
+	 * Initialize the interrupt controller driver so that
+	 * it's ready to use, specify the device ID that is generated in
+	 * xparameters.h
+	 */
+//	Status = XIntc_Initialize(IntcInstancePtr, INTC_DEVICE_ID);
+//	if (Status != XST_SUCCESS) {
+//		return XST_FAILURE;
+//	}
+
+	/*
+	 * Connect a Fast handler that will be called when an interrupt
+	 * for the device occurs.
+	 */
+//	Status = XIntc_ConnectFastHandler(IntcInstancePtr, IntrId,
+//				(XFastInterruptHandler)TmrCtr_FastHandler);
+//	if (Status != XST_SUCCESS) {
+//		return XST_FAILURE;
+//	}
+
+	/*
+	 * Start the interrupt controller such that interrupts are enabled for
+	 * all devices that cause interrupts, specific real mode so that
+	 * the timer counter can cause interrupts through the
+	 * interrupt controller.
+	 */
+//	Status = XIntc_Start(IntcInstancePtr, XIN_REAL_MODE);
+//	if (Status != XST_SUCCESS) {
+//		return XST_FAILURE;
+//	}
+
+	/*
+	 * Enable the interrupt for the timer counter
+	 */
+//	XIntc_Enable(IntcInstancePtr, IntrId);
+
+	/*
+	 * Initialize the exception table.
+	 */
+//	Xil_ExceptionInit();
+
+	/*
+	 * Register the interrupt controller handler with the exception table.
+	 */
+//	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+//					(Xil_ExceptionHandler)
+//					XIntc_InterruptHandler,
+//					IntcInstancePtr);
+	/*
+	 * Enable non-critical exceptions.
+	 */
+//	Xil_ExceptionEnable();
+
+//	return XST_SUCCESS;
+//}
+
+
+/*****************************************************************************/
+/**
+*
+* This function disables the interrupts for the Timer.
+*
+* @param	IntcInstancePtr is a reference to the Interrupt Controller
+*		driver Instance.
+* @param	IntrId is XPAR_<INTC_instance>_<Timer_instance>_VEC_ID
+*		value from xparameters.h.
+*
+* @return	None.
+*
+* @note		None.
+*
+******************************************************************************/
+void TmrCtrDisableIntr(XIntc *IntcInstancePtr, u16 IntrId)
+{
+	/*
+	 * Disable the interrupt for the timer counter
+	 */
+	XIntc_Disable(IntcInstancePtr, IntrId);
+}
+
+
+/*****************************************************************************/
+/**
+*
+* This is the Fast Interrupt Handler for the Timer.
+*
+* @return	None.
+*
+* @note		None.
+*
+****************************************************************************/
+void TmrCtr_FastHandler(void)
+{
+
+	/* Call the TmrCtr Interrupt handler */
+	XTmrCtr_InterruptHandler(&TimerCounterInst);
+}
+
+
+void Initialize_sensors() {
+  /*
+   * Initialize ADC device
+   */
+   AD2_begin(&IRsensor, XPAR_PMODAD2_0_AXI_LITE_IIC_BASEADDR, AD2_IIC_ADDR);
+   // Turn on channel 0
+   AD2_WriteConfig(&IRsensor, AD2_CONFIG_CH0);
+
+   /*
+	* Initialize PMOD GPIO
+	*/
+   GPIO_begin(&USsensor, XPAR_PMODGPIO_0_AXI_LITE_GPIO_BASEADDR, 0xEE);
+}
+
+void USsensorSetup() {
+    //Setup pulse for ultrasonic sensor
+    GPIO_setPin(&USsensor, 1, 0);
+    usleep(2);
+    GPIO_setPin(&USsensor, 1, 1);
+    usleep(10);
+    GPIO_setPin(&USsensor, 1, 0);
+}
+
+void Cleanup() {
+   DisableCaches();
+}
+
+void EnableCaches() {
+#ifdef __MICROBLAZE__
+#ifdef XPAR_MICROBLAZE_USE_ICACHE
+   Xil_ICacheEnable();
+#endif
+#ifdef XPAR_MICROBLAZE_USE_DCACHE
+   Xil_DCacheEnable();
+#endif
+#endif
+}
+
+void DisableCaches() {
+#ifdef __MICROBLAZE__
+#ifdef XPAR_MICROBLAZE_USE_DCACHE
+   Xil_DCacheDisable();
+#endif
+#ifdef XPAR_MICROBLAZE_USE_ICACHE
+   Xil_ICacheDisable();
+#endif
+#endif
+}
+
+int Server_initialize() {
+#if LWIP_IPV6==0
+	ip_addr_t ipaddr, netmask, gw;
+
+#endif
+	/* the mac address of the board. this should be unique per board */
+	unsigned char mac_ethernet_address[] =
+	{ 0x00, 0x0a, 0x35, 0x00, 0x01, 0x02 };
+
+	echo_netif = &server_netif;
+#if defined (__arm__) && !defined (ARMR5)
+#if XPAR_GIGE_PCS_PMA_SGMII_CORE_PRESENT == 1 || XPAR_GIGE_PCS_PMA_1000BASEX_CORE_PRESENT == 1
+	ProgramSi5324();
+	ProgramSfpPhy();
+#endif
+#endif
+
+/* Define this board specific macro in order perform PHY reset on ZCU102 */
+#ifdef XPS_BOARD_ZCU102
+	if(IicPhyReset()) {
+		xil_printf("Error performing PHY reset \n\r");
+		return -1;
+	}
+#endif
+
+	init_platform();
+
+#if LWIP_IPV6==0
+#if LWIP_DHCP==1
+    ipaddr.addr = 0;
+	gw.addr = 0;
+	netmask.addr = 0;
+#else
+	/* initliaze IP addresses to be used */
+	IP4_ADDR(&ipaddr,  192, 168,   1, 10);
+	IP4_ADDR(&netmask, 255, 255, 255,  0);
+	IP4_ADDR(&gw,      192, 168,   1,  1);
+#endif
+#endif
+	print_app_header();
+
+	lwip_init();
+
+	#if (LWIP_IPV6 == 0)
+		/* Add network interface to the netif_list, and set it as default */
+		if (!xemac_add(echo_netif, &ipaddr, &netmask,
+							&gw, mac_ethernet_address,
+							PLATFORM_EMAC_BASEADDR)) {
+			xil_printf("Error adding N/W interface\n\r");
+			return -1;
+		}
+	#else
+		/* Add network interface to the netif_list, and set it as default */
+		if (!xemac_add(echo_netif, NULL, NULL, NULL, mac_ethernet_address,
+							PLATFORM_EMAC_BASEADDR)) {
+			xil_printf("Error adding N/W interface\n\r");
+			return -1;
+		}
+		echo_netif->ip6_autoconfig_enabled = 1;
+
+		netif_create_ip6_linklocal_address(echo_netif, 1);
+		netif_ip6_addr_set_state(echo_netif, 0, IP6_ADDR_VALID);
+
+		print_ip6("\n\rBoard IPv6 address ", &echo_netif->ip6_addr[0].u_addr.ip6);
+
+	#endif
+		netif_set_default(echo_netif);
+
+		/* now enable interrupts */
+		platform_enable_interrupts();
+
+		/* specify that the network if is up */
+		netif_set_up(echo_netif);
+
+	#if (LWIP_IPV6 == 0)
+	#if (LWIP_DHCP==1)
+		/* Create a new DHCP client for this interface.
+		 * Note: you must call dhcp_fine_tmr() and dhcp_coarse_tmr() at
+		 * the predefined regular intervals after starting the client.
+		 */
+		dhcp_start(echo_netif);
+		dhcp_timoutcntr = 24;
+
+		while(((echo_netif->ip_addr.addr) == 0) && (dhcp_timoutcntr > 0))
+			xemacif_input(echo_netif);
+
+		if (dhcp_timoutcntr <= 0) {
+			if ((echo_netif->ip_addr.addr) == 0) {
+				xil_printf("DHCP Timeout\r\n");
+				xil_printf("Configuring default IP of 192.168.1.10\r\n");
+				IP4_ADDR(&(echo_netif->ip_addr),  192, 168,   1, 10);
+				IP4_ADDR(&(echo_netif->netmask), 255, 255, 255,  0);
+				IP4_ADDR(&(echo_netif->gw),      192, 168,   1,  1);
+			}
+		}
+
+		ipaddr.addr = echo_netif->ip_addr.addr;
+		gw.addr = echo_netif->gw.addr;
+		netmask.addr = echo_netif->netmask.addr;
+	#endif
+
+		print_ip_settings(&ipaddr, &netmask, &gw);
+
+	#endif
+	/* start the application (web server, rxtest, txtest, etc..) */
+	start_application();
+
+	return 0;
+
+}

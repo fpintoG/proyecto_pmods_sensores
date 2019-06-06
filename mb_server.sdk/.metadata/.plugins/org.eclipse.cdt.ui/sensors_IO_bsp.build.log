@@ -1,0 +1,6 @@
+23:29:11 **** Build of project sensors_IO_bsp ****
+make -k all 
+make: *** No rule to make target 'all'.
+
+23:29:11 Build Finished (took 190ms)
+

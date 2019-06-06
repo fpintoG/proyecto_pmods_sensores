@@ -1,0 +1,58 @@
+21:37:44 **** Auto Build of configuration Debug for project sensors_IO ****
+make all 
+Building file: ../src/main.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../sensors_IO_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'Run':
+../src/main.c:229:11: warning: variable 'fusionDist' set but not used [-Wunused-but-set-variable]
+    double fusionDist = 0;
+           ^~~~~~~~~~
+../src/main.c: In function 'Initialize_server':
+../src/main.c:387:11: warning: 'return' with a value, in function returning void
+    return -1;
+           ^
+../src/main.c:338:6: note: declared here
+ void Initialize_server() {
+      ^~~~~~~~~~~~~~~~~
+Finished building: ../src/main.c
+ 
+Building target: sensors_IO.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../sensors_IO_bsp/microblaze_0/lib -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -Wl,--gc-sections -o "sensors_IO.elf"  ./src/circular_buffer.o ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sensor_fusion.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/echo.o: In function `recv_callback':
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:59: undefined reference to `tcp_close'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:60: undefined reference to `tcp_recv'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:65: undefined reference to `tcp_recved'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:72: undefined reference to `fusionDist'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:72: undefined reference to `tcp_write'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:77: undefined reference to `pbuf_free'
+./src/echo.o: In function `accept_callback':
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:87: undefined reference to `tcp_recv'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:91: undefined reference to `tcp_arg'
+./src/echo.o: In function `start_application':
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:107: undefined reference to `tcp_new_ip_type'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:114: undefined reference to `ip_addr_any'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:114: undefined reference to `tcp_bind'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:121: undefined reference to `tcp_arg'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:124: undefined reference to `tcp_listen_with_backlog'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/echo.c:131: undefined reference to `tcp_accept'
+./src/main.o: In function `Run':
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:262: undefined reference to `tcp_fasttmr'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:266: undefined reference to `tcp_slowtmr'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:269: undefined reference to `xemacif_input'
+./src/main.o: In function `Initialize_server':
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:379: undefined reference to `lwip_init'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:383: undefined reference to `xemac_add'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:404: undefined reference to `netif_set_default'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:410: undefined reference to `netif_set_up'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:418: undefined reference to `dhcp_start'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/main.c:422: undefined reference to `xemacif_input'
+./src/platform.o: In function `timer_callback':
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/platform.c:172: undefined reference to `dhcp_fine_tmr'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/platform.c:172: undefined reference to `dhcp_coarse_tmr'
+C:\Users\felip\mb_server\mb_server.sdk\sensors_IO\Debug/../src/platform.c:172: undefined reference to `eth_link_detect'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:38: sensors_IO.elf] Error 1
+
+21:37:45 Build Finished (took 1s.90ms)
+

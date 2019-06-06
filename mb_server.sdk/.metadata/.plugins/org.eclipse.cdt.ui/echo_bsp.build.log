@@ -1,0 +1,79 @@
+02:41:25 **** Build of project echo_bsp ****
+make -k all 
+"Running Make include in microblaze_0/libsrc/bram_v4_2/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/bram_v4_2/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/cpu_v2_8/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/cpu_v2_8/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/emaclite_v4_3/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/emaclite_v4_3/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/intc_v3_8/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/intc_v3_8/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/lwip202_v1_2/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/lwip202_v1_2/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/PmodAD2_v1_0/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/PmodAD2_v1_0/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/PmodGPIO_v1_0/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/PmodGPIO_v1_0/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/standalone_v6_8/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/standalone_v6_8/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/tmrctr_v4_5/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/tmrctr_v4_5/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_0/libsrc/uartlite_v3_2/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/uartlite_v3_2/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make libs in microblaze_0/libsrc/bram_v4_2/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/bram_v4_2/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling bram"
+"Running Make libs in microblaze_0/libsrc/cpu_v2_8/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/cpu_v2_8/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling cpu"
+"Running Make libs in microblaze_0/libsrc/emaclite_v4_3/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/emaclite_v4_3/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling emaclite"
+"Running Make libs in microblaze_0/libsrc/intc_v3_8/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/intc_v3_8/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling intc"
+"Running Make libs in microblaze_0/libsrc/lwip202_v1_2/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/lwip202_v1_2/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling lwip src and adapter files"
+"Running Make libs in microblaze_0/libsrc/PmodAD2_v1_0/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/PmodAD2_v1_0/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling PmodAD2..."
+In file included from xiic.h:311:0,
+                 from PmodAD2.h:23,
+                 from PmodAD2.c:21:
+PmodAD2.c: In function 'AD2_IICInit':
+xiic_l.h:300:13: warning: passing argument 1 of 'Xil_Out32' makes integer from pointer without a cast [-Wint-conversion]
+  XIic_Out32((BaseAddress) + (RegOffset), (RegisterValue))
+             ^
+xiic_l.h:317:2: note: in expansion of macro 'XIic_WriteReg'
+  XIic_WriteReg((BaseAddress), XIIC_DGIER_OFFSET, 0)
+  ^~~~~~~~~~~~~
+PmodAD2.c:80:4: note: in expansion of macro 'XIic_IntrGlobalDisable'
+    XIic_IntrGlobalDisable(IicInstancePtr);
+    ^~~~~~~~~~~~~~~~~~~~~~
+In file included from xiic_l.h:98:0,
+                 from xiic.h:311,
+                 from PmodAD2.h:23,
+                 from PmodAD2.c:21:
+../../../include/xil_io.h:219:20: note: expected 'UINTPTR {aka unsigned int}' but argument is of type 'XIic * {aka struct <anonymous> *}'
+ static INLINE void Xil_Out32(UINTPTR Addr, u32 Value)
+                    ^~~~~~~~~
+"Running Make libs in microblaze_0/libsrc/PmodGPIO_v1_0/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/PmodGPIO_v1_0/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling PmodGPIO..."
+"Running Make libs in microblaze_0/libsrc/standalone_v6_8/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/standalone_v6_8/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling standalone";
+microblaze_sleep.c:77:9: note: #pragma message: For the sleep routines, assembly instructions are used
+ #pragma message ("For the sleep routines, assembly instructions are used")
+         ^~~~~~~
+"Running Make libs in microblaze_0/libsrc/tmrctr_v4_5/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/tmrctr_v4_5/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling tmrctr"
+"Running Make libs in microblaze_0/libsrc/uartlite_v3_2/src"
+C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/uartlite_v3_2/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling uartlite"
+'Finished building libraries'
+
+02:41:44 Build Finished (took 19s.328ms)
+
