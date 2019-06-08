@@ -15,7 +15,7 @@ Se busca leer dos sensores orientados a medir distancia.
 #### Sensor  SHARP GP2Y0A02YK0F
 
 ![infrared](https://user-images.githubusercontent.com/6885419/59152999-f2944a00-8a1d-11e9-9633-cc5c80acd938.jpg)
-<img src="https://user-images.githubusercontent.com/6885419/59152999-f2944a00-8a1d-11e9-9633-cc5c80acd938.jpgo" width="48">
+<img src=https://user-images.githubusercontent.com/6885419/59152999-f2944a00-8a1d-11e9-9633-cc5c80acd938.jpgo width="48">
 
 El primero es un sensor infrarrojo, cuya entrada es análoga, por lo que es necesario utilizar un ADC de 12 bits para recibir la señal digital en la FPGA. La señal obtenida es transformada a distancia utilizando la curva de distancia/voltaje proporcionada por el fabricante.
 
