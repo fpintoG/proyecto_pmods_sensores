@@ -12,7 +12,7 @@ El diseño a alto nivel del sistema consiste en la implementación de un servido
 
 Se busca leer dos sensores orientados a medir distancia.
 
-#### Sensor  SHARP2YOA02
+#### Sensor  SHARP GP2Y0A02YK0F
 
 El primero es un sensor infrarrojo, cuya entrada es análoga, por lo que es necesario utilizar un ADC de 12 bits para recibir la señal digital en la FPGA. La señal obtenida es transformada a distancia utilizando la curva de distancia/voltaje proporcionada por el fabricante.
 
