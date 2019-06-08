@@ -16,7 +16,7 @@ xlabel('time','FontSize',15);
 ylabel('disntance [cm]','FontSize',15);
 legend('IR sensor','US sensor','sensor fusion')
 yaxis([0 150]);
-grid(plotGrid);
+grid on;
 
 %server connection
 t = tcpclient('192.168.1.10', 7);
