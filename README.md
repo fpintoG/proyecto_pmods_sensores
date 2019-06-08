@@ -6,6 +6,8 @@ El proyecto se basa en la utilización de una FPGA para recibir y procesar infor
 
 El diseño a alto nivel del sistema consiste en la implementación de un servidor TCP sobre el hardware de la FPGA, el cual mediante una interfaz, recibe información de los sensores. Luego, este servidor se comunica a través de la red para enviar los datos procesados al cliente que los solicite (cabe destacar que el servidor puede recibir multiples conexiones de forma concurrente).
 
+![diagrama_general_proyecto](https://user-images.githubusercontent.com/6885419/59152844-659bc180-8a1a-11e9-9238-d148de9c8314.png)
+
 ### Diseño de interfaz con sensores
 
 Se busca leer dos sensores orientados a medir distancia.
