@@ -26,6 +26,14 @@ Por otra parte, se agrega un sensor de ultrasonido digital. Sin embargo, para me
 
 ### Módulo de procesamiento
 
+Este módulo está implementado sobre el IPcore Microblaze, el cual que genera un procesador con la lógica de la FPGA. Entre las especificaciones de diseño necesarias para correr el sistema se requirió por una parte, que el procesador tenga integrada una FPU (Floating-point Unit) con el objetivo de realizar distintas operaciones matematicas manteniendo la precisión en punto flotante, y por otra, que se encuentren habilitadas las interrupciones para poder comunicarse con los módulos de los sensores y también con el hardware para la comunicación via ethernet.
+
+Los datos provenientes de Los sensores son almacenados en un buffer circular de tamaño igual a 20 muestras. Cuando se llena el buffer, se aplica un algoritmo bayesiano encargado de fusionar los datos.
+
+#### Algoritmo de "sensor fusion"
+
+Se implementa
+
 ### Implementación de servidor TCP
 
 ### Diseño de interfaz para cliente
