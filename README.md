@@ -20,6 +20,8 @@ El primero es un sensor infrarrojo, cuya entrada es análoga, por lo que es nece
 
 #### Sensor HC-SR04
 
+<img src="https://user-images.githubusercontent.com/6885419/59153046-0c825c80-8a1f-11e9-9226-131cb57604fb.jpg" alt="drawing" width="200"/>
+
 Por otra parte, se agrega un sensor de ultrasonido digital. Sin embargo, para medir distancia, es necesario generar un pulso de ancho igual a 8 us. Este pulso es generado por un pin configurado como salida en uno de los pmods disponibles en la fpga. Luego, en otro pin designado como "echo" se recube la respuesta del sensor, que consiste en un pulso de ultrasonido generado por la señal reflejada frente a un obstaculo. Finalmente, para obtener distancia se mide el ancho del pulso recibido y se realiza la conversión necesaria.  
 
 ### Módulo de procesamiento
