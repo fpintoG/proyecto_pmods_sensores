@@ -6357,3 +6357,72 @@ make: Nothing to be done for 'all'.
 02:17:31 **** Incremental Build of configuration Debug for project test_echo ****
 make all 
 make: Nothing to be done for 'all'.
+23:28:37 **** Auto Build of configuration Debug for project test_echo ****
+make all 
+Building file: ../src/sensor_fusion.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/sensor_fusion.o" -I../../test_echo_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/sensor_fusion.d" -MT"src/sensor_fusion.o" -o "src/sensor_fusion.o" "../src/sensor_fusion.c"
+Finished building: ../src/sensor_fusion.c
+ 
+Building target: test_echo.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../test_echo_bsp/microblaze_0/lib -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -Wl,--gc-sections -o "test_echo.elf"  ./src/circular_buffer.o ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sensor_fusion.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+Finished building target: test_echo.elf
+ 
+Invoking: MicroBlaze Print Size
+mb-size test_echo.elf  |tee "test_echo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 182760	   1608	3962632	4147000	 3f4738	test_echo.elf
+Finished building: test_echo.elf.size
+ 
+23:28:52 **** Auto Build of configuration Debug for project test_echo ****
+make all 
+Building file: ../src/sensor_fusion.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/sensor_fusion.o" -I../../test_echo_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/sensor_fusion.d" -MT"src/sensor_fusion.o" -o "src/sensor_fusion.o" "../src/sensor_fusion.c"
+Finished building: ../src/sensor_fusion.c
+ 
+Building target: test_echo.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../test_echo_bsp/microblaze_0/lib -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -Wl,--gc-sections -o "test_echo.elf"  ./src/circular_buffer.o ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sensor_fusion.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+Finished building target: test_echo.elf
+ 
+Invoking: MicroBlaze Print Size
+mb-size test_echo.elf  |tee "test_echo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 182760	   1608	3962632	4147000	 3f4738	test_echo.elf
+Finished building: test_echo.elf.size
+ 
+23:32:32 **** Auto Build of configuration Debug for project test_echo ****
+make all 
+Building file: ../src/circular_buffer.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/circular_buffer.o" -I../../test_echo_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/circular_buffer.d" -MT"src/circular_buffer.o" -o "src/circular_buffer.o" "../src/circular_buffer.c"
+Finished building: ../src/circular_buffer.c
+ 
+Building file: ../src/echo.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/echo.o" -I../../test_echo_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/echo.d" -MT"src/echo.o" -o "src/echo.o" "../src/echo.c"
+Finished building: ../src/echo.c
+ 
+Building file: ../src/main.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../test_echo_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building file: ../src/sensor_fusion.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/sensor_fusion.o" -I../../test_echo_bsp/microblaze_0/include -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/sensor_fusion.d" -MT"src/sensor_fusion.o" -o "src/sensor_fusion.o" "../src/sensor_fusion.c"
+Finished building: ../src/sensor_fusion.c
+ 
+Building target: test_echo.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../test_echo_bsp/microblaze_0/lib -mlittle-endian -mno-xl-soft-div -mcpu=v11.0 -mno-xl-soft-mul -mhard-float -mxl-float-convert -mxl-float-sqrt -Wl,--no-relax -Wl,--gc-sections -o "test_echo.elf"  ./src/circular_buffer.o ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sensor_fusion.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+Finished building target: test_echo.elf
+ 
+Invoking: MicroBlaze Print Size
+mb-size test_echo.elf  |tee "test_echo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 182760	   1608	3962632	4147000	 3f4738	test_echo.elf
+Finished building: test_echo.elf.size
+ 

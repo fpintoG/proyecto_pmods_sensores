@@ -1,8 +1,5 @@
 /*
  * sensor_fusion.h
- *
- *  Created on: May 9, 2019
- *      Author: felip
  */
 
 #ifndef SRC_SENSOR_FUSION_H_

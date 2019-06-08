@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
- 183100	   1608	3962636	4147344	 3f4890	test_echo.elf
+ 182760	   1608	3962632	4147000	 3f4738	test_echo.elf

@@ -1,5 +1,8 @@
 /*
  * sensor_fusion.c
+ *
+ *  Created on: May 4, 2019
+ *      Author: felip
  */
 
 #include <math.h>
@@ -42,7 +45,7 @@ double getFusionData(double data1[], size_t len1, double data2[], size_t len2)
 	double var1 = calculateVAR(data1, mean1, len1);
 	double var2 = calculateVAR(data2, mean2, len2);
 
-	double fusionMean = ((mean1 / var1) + (mean2 / var2)) / ((1/var1) +  (1/var2));
+	double fusionMean = ((mean1 / var1) + (mean2 / var2)) / ((1/var1) *  (1/var2));
 
 	return fusionMean;
 }
