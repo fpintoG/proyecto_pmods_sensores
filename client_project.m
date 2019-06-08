@@ -14,7 +14,7 @@ plotGraph2 = plot(fusionDataBuff,'-g' );
 title('Sensor distance data','FontSize',15);
 xlabel('time','FontSize',15);
 ylabel('disntance [cm]','FontSize',15);
-legend(legend1,legend2,legend3)
+legend('IR sensor','US sensor','sensor fusion')
 yaxis([0 150]);
 grid(plotGrid);
 
