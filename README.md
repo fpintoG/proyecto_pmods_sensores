@@ -34,33 +34,33 @@ Los datos provenientes de Los sensores son almacenados en un buffer circular de 
 
 Se implementa un algoritmo estocastico basado en el teorema de Bayes para fusionar la información proveniente de los dos sensores. Para el funcionamiento este algoritmo, se asume que las mediciones obtenidas por los dispositivos son de la forma:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=z&space;=&space;x&space;&plus;&space;n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?z&space;=&space;x&space;&plus;&space;n" title="z = x + n" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=z&space;=&space;x&space;&plus;&space;n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?z&space;=&space;x&space;&plus;&space;n" title="z = x + n"/></a></center>
 
 Donde z es la medición obtenida, x el valor real y n representa ruido aleatorio con una distribución gaussiana. Luego, la función de densidad condicional de z dado x será:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(z|x)&space;=&space;k&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(z|x)&space;=&space;k&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="P(z|x) = k \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=P(z|x)&space;=&space;k&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(z|x)&space;=&space;k&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="P(z|x) = k \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a></center>
 
 Entonces, es posible obtener la función de "likelyhood" (básicamente, representa la densidad de probabilidad para x dada la data obtenida), que es igual a la siguiente expresión:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(z;x) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(z;x) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a></center>
 
 Luego, dadas las mediciones recolectadas de dos sensores distintos z1 y z2, es posible aplicar el teorema de bayes para obtener la función de densidad de probabilidad para la distancia x:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{1})" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{1})" /></a></center>
 
 En este caso, se asume que no se tiene onformación previa sobre x, por lo que se asume que:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x)&space;=&space;1" title="P(x) = 1" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=P(x)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x)&space;=&space;1" title="P(x) = 1" /></a></center>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" title="P(x|z_{1},z_{2}) = \exp{\frac{1}{2}\left(\frac{x - z_{1}}{\sigma}\right)^{2}} \exp{\frac{1}{2}\left(\frac{x - z_{2}}{\sigma}\right)^{2}}" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" title="P(x|z_{1},z_{2}) = \exp{\frac{1}{2}\left(\frac{x - z_{1}}{\sigma}\right)^{2}} \exp{\frac{1}{2}\left(\frac{x - z_{2}}{\sigma}\right)^{2}}" /></a></center>
 
 Por lo que, es valor mas probable para x se encuentra al maximizar la función de densidad obtenida:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1}z_{2})" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1}z_{2})" /></a></center>
 
 Donde, al despajar la expresión para el valor x, se obtiene que la estimasión final será:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" title="\hat{x} = \frac{\frac{z_{1}}{\sigma_{1}^{2}} + \frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}} + \frac{1}{\sigma_{2}^{2}}}" /></a>
+<center><a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" title="\hat{x} = \frac{\frac{z_{1}}{\sigma_{1}^{2}} + \frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}} + \frac{1}{\sigma_{2}^{2}}}" /></a></center>
 
 ### Implementación de servidor TCP
 
