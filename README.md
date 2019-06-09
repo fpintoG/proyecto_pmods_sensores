@@ -56,7 +56,7 @@ En este caso, se asume que no se tiene información previa sobre x, por lo que s
 
 Por lo que, es valor mas probable para x se encuentra al maximizar la función de densidad obtenida:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1}z_{2})" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1},z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1},z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1},z_{2})" /></a>
 
 Donde, al resolver la expresión para el valor x, se obtiene que la estimación final será:
 
