@@ -15,7 +15,6 @@ title('Sensor distance data','FontSize',15);
 xlabel('Time [-]','FontSize',15);
 ylabel('Distance [cm]','FontSize',15);
 legend('IR sensor','US sensor','sensor fusion')
-yaxis([0 150]);
 grid on;
 
 %server connection
