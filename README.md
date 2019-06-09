@@ -22,11 +22,11 @@ El primero es un sensor infrarrojo, cuya entrada es análoga, por lo que es nece
 
 <img src="https://user-images.githubusercontent.com/6885419/59153046-0c825c80-8a1f-11e9-9226-131cb57604fb.jpg" alt="drawing" width="200"/>
 
-Por otra parte, se agrega un sensor de ultrasonido digital. Sin embargo, para medir distancia, es necesario generar un pulso de ancho igual a 8 us. Este pulso es generado por un pin configurado como salida en uno de los pmods disponibles en la fpga. Luego, en otro pin designado como "echo" se recube la respuesta del sensor, que consiste en un pulso de ultrasonido generado por la señal reflejada frente a un obstaculo. Finalmente, para obtener distancia se mide el ancho del pulso recibido y se realiza la conversión necesaria.  
+Por otra parte, se agrega un sensor de ultrasonido digital. Sin embargo, para medir distancia, es necesario generar un pulso de ancho igual a 8 us. Este pulso es generado por un pin configurado como salida en uno de los pmods disponibles en la fpga. Luego, en otro pin designado como "echo" se recibe la respuesta del sensor, que consiste en un pulso de ultrasonido generado por la señal reflejada frente a un obstaculo. Finalmente, para obtener distancia se mide el ancho del pulso recibido y se realiza la conversión necesaria.  
 
 ### Módulo de procesamiento
 
-Este módulo está implementado sobre el IPcore Microblaze, el cual que genera un procesador con la lógica de la FPGA. Entre las especificaciones de diseño necesarias para correr el sistema se requirió por una parte, que el procesador tenga integrada una FPU (Floating-point Unit) con el objetivo de realizar distintas operaciones matematicas manteniendo la precisión en punto flotante, y por otra, que se encuentren habilitadas las interrupciones para poder comunicarse con los módulos de los sensores y también con el hardware para la comunicación via ethernet.
+Este módulo está implementado sobre el IPcore Microblaze, el cual que genera un procesador con la lógica de la FPGA. Entre las especificaciones de diseño necesarias para correr el sistema se requirió por una parte, que el procesador tenga integrada una FPU (Floating-point Unit) con el objetivo de realizar distintas operaciones matematicas manteniendo la precisión en punto flotante, y por otra, que se encuentren habilitadas las interrupciones para poder comunicarse con los módulos de los sensores y también con el hardware que implementa el enlace via ethernet.
 
 Los datos provenientes de Los sensores son almacenados en un buffer circular de tamaño igual a 20 muestras. Cuando se llena el buffer, se aplica un algoritmo bayesiano encargado de fusionar los datos.
 
@@ -44,11 +44,11 @@ Entonces, es posible obtener la función de "likelyhood" (básicamente, represen
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(z;x) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
 
-Luego, dadas las mediciones recolectadas de dos sensores distintos z1 y z2, es posible aplicar el teorema de bayes para obtener la función de densidad de probabilidad para la distancia x:
+Luego, dadas las mediciones recolectadas desde dos sensores distintos z1 y z2, es posible aplicar el teorema de Bayes para obtener la función de densidad de probabilidad asociada a la distancia x:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{1})" /></a>
 
-En este caso, se asume que no se tiene onformación previa sobre x, por lo que se asume que:
+En este caso, se asume que no se tiene información previa sobre x, por lo que se asume que:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(x)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x)&space;=&space;1" title="P(x) = 1" /></a>
 
@@ -58,12 +58,18 @@ Por lo que, es valor mas probable para x se encuentra al maximizar la función d
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1}z_{2})" /></a>
 
-Donde, al resolver la expresión para el valor x, se obtiene que la estimasión final será:
+Donde, al resolver la expresión para el valor x, se obtiene que la estimación final será:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" title="\hat{x} = \frac{\frac{z_{1}}{\sigma_{1}^{2}} + \frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}} + \frac{1}{\sigma_{2}^{2}}}" /></a>
 
 ### Implementación de servidor TCP
 
+La comunicación es realizada mediante un enlace ethernet de 100 mb/s. Sobre el procesador Microblaze se monta un servidor TCP/IP con ip local 192.168.1.10 que escucha en el puerto 7. Luego, para manejar solicitudes entrantes, se utilizan interrupciones sobre el flujo principal del programa que llaman a funciones tipo "callback", ya sea para recibir o enviar información a travez del socket. En este caso, se genera una solicitud cada vez que el o los clientes conectados envian un paquete TCP.
+
+![ethernet](https://user-images.githubusercontent.com/6885419/59155764-91409b00-8a5e-11e9-85bc-cd3392414d2e.png)
+
 ### Diseño de interfaz para cliente
+
+El cliente consiste en una interfaz que envía solicitudes al servidor TCP montado sobre la FPGA para recibir la información procesada. Además, se genera un gráfico en tiempo real, pudiendo comparar las mediciones del sensor infrarrojo, de ultrasonido y también el resultado de la fusión tomando en cuenta el algoritmo prsentado previamente.
 
 ## Pruebas realizadas
