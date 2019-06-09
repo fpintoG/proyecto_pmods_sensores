@@ -60,7 +60,7 @@ Por lo que, es valor mas probable para x se encuentra al maximizar la función d
 
 Donde, al despajar la expresión para el valor x, se obtiene que la estimasión final será:
 
-\hat{x} = \frac{\frac{z_{1}}{\sigma_{1}^{2}} + \frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}} + \frac{1}{\sigma_{2}^{2}}}
+<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\frac{\frac{z_{1}}{\sigma_{1}^{2}}&space;&plus;&space;\frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}}&space;&plus;&space;\frac{1}{\sigma_{2}^{2}}}" title="\hat{x} = \frac{\frac{z_{1}}{\sigma_{1}^{2}} + \frac{z_{2}}{\sigma_{2}^{2}}}{\frac{1}{\sigma_{1}^{2}} + \frac{1}{\sigma_{2}^{2}}}" /></a>
 
 ### Implementación de servidor TCP
 
