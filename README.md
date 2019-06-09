@@ -34,6 +34,10 @@ Los datos provenientes de Los sensores son almacenados en un buffer circular de 
 
 Se implementa
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=y&space;=&space;x^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y&space;=&space;x^{2}" title="y = x^{2}" /></a>
+
+blablabla
+
 ### Implementación de servidor TCP
 
 ### Diseño de interfaz para cliente
