@@ -42,7 +42,7 @@ Donde z es la medición obtenida, x el valor real y n representa ruido aleatorio
 
 Entonces, es posible obtener la función de "likelyhood" (básicamente, representa la densidad de probabilidad para x dada la data obtenida), que es igual a la siguiente expresión:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(z;x) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=L(x;z)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(x;z)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(x;z) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
 
 Luego, dadas las mediciones recolectadas desde dos sensores distintos z1 y z2, es posible aplicar el teorema de Bayes para obtener la función de densidad de probabilidad asociada a la distancia x:
 
