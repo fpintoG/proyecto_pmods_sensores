@@ -34,7 +34,7 @@ Los datos provenientes de Los sensores son almacenados en un buffer circular de 
 
 Se implementa un algoritmo estocastico basado en el teorema de Bayes para fusionar la información proveniente de los dos sensores. Para el funcionamiento este algoritmo, se asume que las mediciones obtenidas por los dispositivos son de la forma:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=z&space;=&space;x&space;&plus;&space;n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?
+<a href="https://www.codecogs.com/eqnedit.php?latex=z&space;=&space;x&space;&plus;&space;n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?z&space;=&space;x&space;&plus;&space;n" title="z = x + n" /></a>
 
 Donde z es la medición obtenida, x el valor real y n representa ruido aleatorio con una distribución gaussiana. Luego, la función de densidad condicional de z dado x será:
 
