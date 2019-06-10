@@ -76,6 +76,12 @@ El cliente consiste en una interfaz que envía solicitudes al servidor TCP monta
 
 Se realizan distintas pruebas con la información recibida por el cliente conectado al servidor. En estas se puede observar un grafico en tiempo real por la distancia siendo monitoreada por desde el pc conectado, el cual recibe los datos a través de un enlace de 100mb/s sobre ethernet.
 
+### AMbiente de pruebas
+
+En la siguiente imagen se muestra el ambiente de pruebas utilizado. En este se levanta una plataforma sobre la cual se montan los sensores. Además se observa una placa de Arduino, sin embargo, esta solo es utilizada para alimentar al sensor de ultrasonido, que requiere 5V para funcionar, mientras que la FPGA solo entrega 3.3V.
+
+![IMG_20190610_000837](https://user-images.githubusercontent.com/6885419/59172301-4f266080-8b15-11e9-9e9e-b6b73391960e.jpg)
+
 ### Buffer de 100 muestras sin limitar tiempo de muestreo
 
 En esta prueba se puede observar la gráfica en tiempo real de las mediciones provenientes desde ambos sensores, así como el resultado procesado por el algoritmo de "sensor fusion".
@@ -90,9 +96,9 @@ En este caso se varía el rango de tiempo que considera el gráfico en tiempo re
 
 ![sensor_data1000](https://user-images.githubusercontent.com/6885419/59170205-94459500-8b0b-11e9-9a3e-06297c4b709d.jpg)
 
-### Prueba de enlace de cominucación
+### Prueba de enlace de comunicación
 
-Se utiliza como enlace ethernet un cable de largo igual a 3 metros. Luego, se monitoréa el tiempo que le toma al pc cliente enviar la solicidud de información y recibir las 3 mediciones con precisión een punto flotante. En la siguiente imagen se puede notar que en promedio el tiempo de respuesta es igual a 35 ms.
+Se utiliza como enlace ethernet un cable de largo igual a 10 metros. Luego, se monitoréa el tiempo que le toma al pc cliente enviar la solicidud de información y recibir las 3 mediciones con precisión en punto flotante. En la siguiente imagen se puede notar que en promedio el tiempo de respuesta es igual a 32 ms.
 
 ![link_meassure](https://user-images.githubusercontent.com/6885419/59171550-62373180-8b11-11e9-97c6-ff309e7dccb6.jpg)
 
