@@ -89,3 +89,13 @@ La imagen muestra que cuando la entropía recibida del sensor de ultrasonido es 
 En este caso se varía el rango de tiempo que considera el gráfico en tiempo real desde 100 a 1000 muestras. Luego, en la imagen se pueden observar resultados similares al caso anterior.
 
 ![sensor_data1000](https://user-images.githubusercontent.com/6885419/59170205-94459500-8b0b-11e9-9a3e-06297c4b709d.jpg)
+
+### Prueba de enlace de cominucación
+
+Se utiliza como enlace ethernet un cable de largo igual a 3 metros. Luego, se monitoréa el tiempo que le toma al pc cliente enviar la solicidud de información y recibir las 3 mediciones con precisión een punto flotante. En la siguiente imagen se puede notar que en promedio el tiempo de respuesta es igual a 35 ms.
+
+![link_meassure](https://user-images.githubusercontent.com/6885419/59171550-62373180-8b11-11e9-97c6-ff309e7dccb6.jpg)
+
+Luego, esto se compara con el tiempo que toma hacer ping al servidor, viendo que los resultados obtenidos son consistentes.
+
+![ping_meassure](https://user-images.githubusercontent.com/6885419/59171548-606d6e00-8b11-11e9-8b30-00480bfe35fb.PNG)
