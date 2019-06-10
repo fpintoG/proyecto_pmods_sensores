@@ -76,7 +76,7 @@ El cliente consiste en una interfaz que envía solicitudes al servidor TCP monta
 
 Se realizan distintas pruebas con la información recibida por el cliente conectado al servidor. En estas se puede observar un grafico en tiempo real por la distancia siendo monitoreada por desde el pc conectado, el cual recibe los datos a través de un enlace de 100mb/s sobre ethernet.
 
-### AMbiente de pruebas
+### Ambiente de pruebas
 
 En la siguiente imagen se muestra el ambiente de pruebas utilizado. En este se levanta una plataforma sobre la cual se montan los sensores. Además se observa una placa de Arduino, sin embargo, esta solo es utilizada para alimentar al sensor de ultrasonido, que requiere 5V para funcionar, mientras que la FPGA solo entrega 3.3V.
 
