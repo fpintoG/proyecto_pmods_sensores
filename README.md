@@ -46,17 +46,17 @@ Entonces, es posible obtener la función de "likelyhood" (básicamente, represen
 
 Luego, dadas las mediciones recolectadas desde dos sensores distintos z1 y z2, es posible aplicar el teorema de Bayes para obtener la función de densidad de probabilidad asociada a la distancia x:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{1})" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{2})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{2})" /></a>
 
 En este caso, se asume que no se tiene información previa sobre x, por lo que se asume que:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(x)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x)&space;=&space;1" title="P(x) = 1" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" title="P(x|z_{1},z_{2}) = \exp{\frac{1}{2}\left(\frac{x - z_{1}}{\sigma}\right)^{2}} \exp{\frac{1}{2}\left(\frac{x - z_{2}}{\sigma}\right)^{2}}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma_{1}}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma_{2}}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma_{1}}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma_{2}}\right)^{2}}" title="P(x|z_{1},z_{2}) = \exp{\frac{1}{2}\left(\frac{x - z_{1}}{\sigma_{1}}\right)^{2}} \exp{\frac{1}{2}\left(\frac{x - z_{2}}{\sigma_{2}}\right)^{2}}" /></a>
 
 Por lo que, es valor mas probable para x se encuentra al maximizar la función de densidad obtenida:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1}z_{2})" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1},z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1},z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1},z_{2})" /></a>
 
 Donde, al resolver la expresión para el valor x, se obtiene que la estimación final será:
 
