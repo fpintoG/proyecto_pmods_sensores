@@ -80,7 +80,7 @@ Se realizan distintas pruebas con la información recibida por el cliente conect
 
 En la siguiente imagen se muestra el ambiente de pruebas utilizado. En este se levanta una plataforma sobre la cual se montan los sensores. Además se observa una placa de Arduino, sin embargo, esta solo es utilizada para alimentar al sensor de ultrasonido, que requiere 5V para funcionar, mientras que la FPGA solo entrega 3.3V.
 
-![IMG_20190610_000837](https://user-images.githubusercontent.com/6885419/59172301-4f266080-8b15-11e9-9e9e-b6b73391960e.jpg)
+<img src="https://user-images.githubusercontent.com/6885419/59172301-4f266080-8b15-11e9-9e9e-b6b73391960e.jpg" alt="imagen_pruebas" width="400"/>
 
 ### Buffer de 100 muestras sin limitar tiempo de muestreo
 
