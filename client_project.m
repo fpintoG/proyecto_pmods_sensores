@@ -35,5 +35,5 @@ while(1)
     set(plotGraph,'YData',IRDistBuff);
     set(plotGraph1,'YData',USDistBuff);
     set(plotGraph2,'YData',fusionDataBuff);
-    pause(1);
+    %pause(1);
 end

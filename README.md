@@ -73,3 +73,13 @@ La comunicación es realizada mediante un enlace ethernet de 100 mb/s. Sobre el 
 El cliente consiste en una interfaz que envía solicitudes al servidor TCP montado sobre la FPGA para recibir la información procesada. Además, se genera un gráfico en tiempo real, pudiendo comparar las mediciones del sensor infrarrojo, de ultrasonido y también el resultado de la fusión tomando en cuenta el algoritmo prsentado previamente.
 
 ## Pruebas realizadas
+
+Se realizan distintas pruebas con la información recibida por el cliente conectado al servidor. En estas se puede observar un grafico en tiempo real por la distancia siendo monitoreada por desde el pc conectado, el cual recibe los datos a través de un enlace de 100mb/s sobre ethernet.
+
+## Buffer de 100 muestras
+
+En esta prueba se puede observar la gráfica en tiempo real de las mediciones provenientes desde ambos sensores, así como el resultado procesado por el algoritmo de "sensor fusion".
+
+![sensors_distance](https://user-images.githubusercontent.com/6885419/59168936-fdc2a500-8b05-11e9-9ba8-587b4f93f8a8.jpg)
+
+La imagen muestra que cuando la entropía recibida del sensor de ultrasonido es alta (lo cual implica que se está recibiendo poca información desde este sensor debido a la alta variabilidad) en el rango que abarca desde 0 y 20, se nota que el algoritmo tiende a considerar más las mediciones del sensor infrarrojo, y por ende, no se experimentan las variaciones generadas en el sensor de ultrasonido. Luego entre los instantes 30 y 50, se observa que dado que ambos sensores se mantienen estables, las medidas del algoritmo equivalen a un promedio entre la información de los distintos dispositivos. Por ultimo, se considera el rango entre los instantes 75 y 90, donde se ve que cuando el sensor infrarrojo se vuelve inestable, se le da una mayor pondelación a la información proveniente del sensor de ultrasonido.
