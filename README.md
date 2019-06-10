@@ -42,21 +42,21 @@ Donde z es la medición obtenida, x el valor real y n representa ruido aleatorio
 
 Entonces, es posible obtener la función de "likelyhood" (básicamente, representa la densidad de probabilidad para x dada la data obtenida), que es igual a la siguiente expresión:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(x;z)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(x;z)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(x;z) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(z;x)&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z}{\sigma}\right)^{2}}" title="L(z;x) = \exp{\frac{1}{2}\left(\frac{x - z}{\sigma}\right)^{2}}" /></a>
 
 Luego, dadas las mediciones recolectadas desde dos sensores distintos z1 y z2, es posible aplicar el teorema de Bayes para obtener la función de densidad de probabilidad asociada a la distancia x:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{2})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{2})" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;\propto&space;P(x)L(x;z_{1})L(x;z_{1})" title="P(x|z_{1},z_{2}) \propto P(x)L(x;z_{1})L(x;z_{1})" /></a>
 
 En este caso, se asume que no se tiene información previa sobre x, por lo que se asume que:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(x)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x)&space;=&space;1" title="P(x) = 1" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma_{1}}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma_{2}}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma_{1}}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma_{2}}\right)^{2}}" title="P(x|z_{1},z_{2}) = \exp{\frac{1}{2}\left(\frac{x - z_{1}}{\sigma_{1}}\right)^{2}} \exp{\frac{1}{2}\left(\frac{x - z_{2}}{\sigma_{2}}\right)^{2}}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x|z_{1},z_{2})&space;=&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{1}}{\sigma}\right)^{2}}&space;\exp{\frac{1}{2}\left(\frac{x&space;-&space;z_{2}}{\sigma}\right)^{2}}" title="P(x|z_{1},z_{2}) = \exp{\frac{1}{2}\left(\frac{x - z_{1}}{\sigma}\right)^{2}} \exp{\frac{1}{2}\left(\frac{x - z_{2}}{\sigma}\right)^{2}}" /></a>
 
 Por lo que, es valor mas probable para x se encuentra al maximizar la función de densidad obtenida:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1},z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1},z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1},z_{2})" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{x}&space;=&space;\operatorname*{argmax}_x&space;P(x|z_{1}z_{2})" title="\hat{x} = \operatorname*{argmax}_x P(x|z_{1}z_{2})" /></a>
 
 Donde, al resolver la expresión para el valor x, se obtiene que la estimación final será:
 
@@ -70,13 +70,13 @@ La comunicación es realizada mediante un enlace ethernet de 100 mb/s. Sobre el 
 
 ### Diseño de interfaz para cliente
 
-El cliente consiste en una interfaz que envía solicitudes al servidor TCP montado sobre la FPGA para recibir la información procesada. Además, se genera un gráfico en tiempo real, pudiendo comparar las mediciones del sensor infrarrojo, de ultrasonido y también el resultado de la fusión tomando en cuenta el algoritmo presentado previamente.
+El cliente consiste en una interfaz que envía solicitudes al servidor TCP montado sobre la FPGA para recibir la información procesada. Además, se genera un gráfico en tiempo real, pudiendo comparar las mediciones del sensor infrarrojo, de ultrasonido y también el resultado de la fusión tomando en cuenta el algoritmo prsentado previamente.
 
 ## Pruebas realizadas
 
 Se realizan distintas pruebas con la información recibida por el cliente conectado al servidor. En estas se puede observar un grafico en tiempo real por la distancia siendo monitoreada por desde el pc conectado, el cual recibe los datos a través de un enlace de 100mb/s sobre ethernet.
 
-## Buffer de 100 muestras
+### Buffer de 100 muestras
 
 En esta prueba se puede observar la gráfica en tiempo real de las mediciones provenientes desde ambos sensores, así como el resultado procesado por el algoritmo de "sensor fusion".
 
