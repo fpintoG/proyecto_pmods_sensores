@@ -76,10 +76,16 @@ El cliente consiste en una interfaz que envía solicitudes al servidor TCP monta
 
 Se realizan distintas pruebas con la información recibida por el cliente conectado al servidor. En estas se puede observar un grafico en tiempo real por la distancia siendo monitoreada por desde el pc conectado, el cual recibe los datos a través de un enlace de 100mb/s sobre ethernet.
 
-### Buffer de 100 muestras
+### Buffer de 100 muestras sin limitar tiempo de muestreo
 
 En esta prueba se puede observar la gráfica en tiempo real de las mediciones provenientes desde ambos sensores, así como el resultado procesado por el algoritmo de "sensor fusion".
 
 ![sensors_distance](https://user-images.githubusercontent.com/6885419/59168936-fdc2a500-8b05-11e9-9ba8-587b4f93f8a8.jpg)
 
-La imagen muestra que cuando la entropía recibida del sensor de ultrasonido es alta (lo cual implica que se está recibiendo poca información desde este sensor debido a la alta variabilidad) en el rango que abarca desde 0 y 20, se nota que el algoritmo tiende a considerar más las mediciones del sensor infrarrojo, y por ende, no se experimentan las variaciones generadas en el sensor de ultrasonido. Luego entre los instantes 30 y 50, se observa que dado que ambos sensores se mantienen estables, las medidas del algoritmo equivalen a un promedio entre la información de los distintos dispositivos. Por ultimo, se considera el rango entre los instantes 75 y 90, donde se ve que cuando el sensor infrarrojo se vuelve inestable, se le da una mayor pondelación a la información proveniente del sensor de ultrasonido.
+La imagen muestra que cuando la entropía recibida del sensor de ultrasonido es alta (lo cual implica que se está recibiendo poca información desde este sensor debido a la alta variabilidad) en el rango que abarca desde 0 y 20, se nota que el algoritmo tiende a considerar más las mediciones del sensor infrarrojo, y por ende, no se experimentan las variaciones generadas en el sensor de ultrasonido. Luego entre los instantes 30 y 50, se observa que dado que ambos sensores se mantienen estables, las medidas del algoritmo equivalen a un promedio entre la información de los distintos dispositivos. Por ultimo, se considera el rango entre los instantes 75 y 90, donde se ve que cuando el sensor infrarrojo se vuelve inestable, se le da una mayor ponderación a la información proveniente del sensor de ultrasonido.
+
+### Buffer de 1000 muestras sin limitar tiempo de muestreo
+
+En este caso se varía el rango de tiempo que considera el gráfico en tiempo real desde 100 a 1000 muestras. Luego, en la imagen se pueden observar resultados similares al caso anterior.
+
+![sensor_data1000](https://user-images.githubusercontent.com/6885419/59170205-94459500-8b0b-11e9-9a3e-06297c4b709d.jpg)
