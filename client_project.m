@@ -1,9 +1,9 @@
 %client side implementation
 
 %sensor buffers
-IRDistBuff = nan(1,100);
-USDistBuff = nan(1,100);
-fusionDataBuff = nan(1,100);
+IRDistBuff = nan(1,1000);
+USDistBuff = nan(1,1000);
+fusionDataBuff = nan(1,1000);
 
 %set up Plot
 plotGraph = plot(IRDistBuff,'-r' );  
@@ -35,5 +35,4 @@ while(1)
     set(plotGraph,'YData',IRDistBuff);
     set(plotGraph1,'YData',USDistBuff);
     set(plotGraph2,'YData',fusionDataBuff);
-    %pause(1);
 end
