@@ -1,4 +1,4 @@
-04:47:42 **** Build of project test_echo_bsp ****
+22:08:49 **** Build of project test_echo_bsp ****
 make -k all 
 "Running Make include in microblaze_0/libsrc/bram_v4_2/src"
 C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/bram_v4_2/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mhard-float -mlittle-endian -mno-xl-soft-div -mno-xl-soft-mul -mxl-float-convert -mxl-float-sqrt" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
@@ -75,5 +75,5 @@ C:/Xilinx2/SDK/2018.3/gnuwin/bin/make -C microblaze_0/libsrc/uartlite_v3_2/src -
 "Compiling uartlite"
 'Finished building libraries'
 
-04:48:06 Build Finished (took 24s.245ms)
+22:09:11 Build Finished (took 21s.947ms)
 
