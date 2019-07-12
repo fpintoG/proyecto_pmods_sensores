@@ -4,4 +4,4 @@ En este repositorio se detalla el funcionamiento de un sistema que hace uso de l
 
 Para mayor información, dirigirse a la [wiki del proyecto](https://github.com/fpintoG/proyecto_pmods_sensores/wiki)
 
-**Importante para implementación: revisar mensaje adjunto en sección sobre interfaz con sensores en la wiki**
+**Importante para implementación: revisar mensaje adjunto en sección sobre interfaz con sensores en la wiki del proyecto.**
